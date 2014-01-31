@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"> 
+<script>
+function FizzBuzz(){
+
+	var valor1 = document.getElementById("valor1").value;
+	var valor2 = document.getElementById("valor2").value;
+	var mult1 = 3;
+	var mult2 = 5;
+	var indi1 = "Fizz";
+	var indi2 = "Buzz";	
+	
+	
+	if( document.getElementById("mult1").value!="" && !isNaN(document.getElementById("mult1").value) ){
+		mult1 = document.getElementById("mult1").value;
+	} 
+
+	if( document.getElementById("mult2").value!="" && !isNaN(document.getElementById("mult2").value) ){
+		mult2 = document.getElementById("mult2").value;
+	}
+
+	if (document.getElementById("indi1").value!=""){
+		indi1 = document.getElementById("indi1").value;
+	}
+
+	if (document.getElementById("indi2").value!=""){
+		indi2 = document.getElementById("indi2").value;
+	}
+
+
+	if(isNaN(valor1)){
+		alert("Error:\nEl parametro 1 debe ser numerico.");
+		return false;	
+	}
+	if(isNaN(valor2)){
+		alert("Error:\nEl parametro 2 debe ser numerico.");
+		return false;	
+	}
+	else{
+
+	    for (var i=valor1; i<=valor2; console.log((i%mult1?'':indi1)+(i%mult2?'':indi2)||i), i++);
+	}	
+};
+
+function guardarDatos(){
+
+	var obj = new Object();
+	obj.valor1 = document.getElementById("valor1").value;
+	obj.valor2 = document.getElementById("valor2").value;
+	obj.mult1  = document.getElementById("mult1").value;
+	obj.mult2  = document.getElementById("mult2").value;
+	obj.indi1  = document.getElementById("indi1").value;
+	obj.indi2  = document.getElementById("indi2").value;	
+	//serializamos
+	objetoS = JSON.stringify(obj);
+	localStorage.setItem('objetoPersistente', objetoS);
+
+}
+
+function recuperarDatos(){
+	objetoS = localStorage.getItem('objetoPersistente');
+	obj = JSON.parse(objetoS);
+	
+	document.getElementById("valor1").setAttribute( "value", obj.valor1);
+	document.getElementById("valor2").setAttribute( "value",obj.valor2);
+	document.getElementById("mult1").setAttribute( "value", obj.mult1);
+	document.getElementById("mult2").setAttribute( "value", obj.mult2);
+	document.getElementById("indi1").setAttribute( "value", obj.indi1);
+	document.getElementById("indi2").setAttribute( "value", obj.indi2);	
+}
+
+</script>
+</head>
+
+<body>
+<h2>Imprimir FizzBuzz:</h2>
+	<form method="post" action="" >
+		Ingrese parametro 1:
+		<input type='text'  name ='valor1' id='valor1'> 
+		Ingrese parametro 2:
+		<input type='text' value='' name ='valor2' id='valor2'> 
+		<br>
+		Ingrese multiplo 1:
+		<input type='text' value='' name ='mult1' id='mult1'> 
+		Ingrese multiplo 2:
+		<input type='text' value='' name ='mult2' id='mult2'> 
+		<br>
+		Ingrese indicador 1:
+		<input type='text' value='' name ='indi1' id='indi1'> 
+		Ingrese indicador 2:
+		<input type='text' value='' name ='indi2' id='indi2'> 
+		<br>
+		<input type="submit" value="Enviar" onClick='FizzBuzz();' />
+		<input type="submit" value="Guardar" onClick='guardarDatos();' />
+		<input type="submit" value="Recuperar Datos" onClick='recuperarDatos();' />
+	</form>
+<script>
+
+</script>
+</body>
+</html>
